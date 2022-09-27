@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <trees>
+     <tree path="/src/main/java/com/wis/school/config" title="配置"/>
+     <tree path="/src/main/java/com/wis/school/controller" title="控制层"/>
+     <tree path="/src/main/java/com/wis/school/mapper" title="持久层接口"/>
+     <tree path="/src/main/java/com/wis/school/pojo" title="实体类"/>
+     <tree path="/src/main/java/com/wis/school/service" title="服务层"/>
+     <tree path="/src/main/java/com/wis/school/util" title="工具类"/>
+     <tree path="/src/main/resources/mapper" title="持久层映射文件"/>
+     <tree path="/src/main/resources/static" title="静态资源"/>
+ </trees>
