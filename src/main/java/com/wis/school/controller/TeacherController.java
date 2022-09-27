@@ -6,5 +6,16 @@
 
 package com.wis.school.controller;
 
-public class AdminController {
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * 老师控制器
+ *
+ * @author liyaj
+ * @date 2022/09/27
+ */
+@RestController
+@RequestMapping("/sms/teacherController")
+public class TeacherController {
 }

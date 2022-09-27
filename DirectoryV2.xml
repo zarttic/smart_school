@@ -8,4 +8,11 @@
      <tree path="/src/main/java/com/wis/school/util" title="工具类"/>
      <tree path="/src/main/resources/mapper" title="持久层映射文件"/>
      <tree path="/src/main/resources/static" title="静态资源"/>
- </trees>
+     <tree path="/src/main/java/com/wis/school/util/CreateVerifyCodeImage.java" title="生成验证码" extension="java"/>
+     <tree path="/src/main/java/com/wis/school/util/JwtHelper.java" title="token生成" extension="java"/>
+    <tree path="/src/main/java/com/wis/school/util/AuthContextHolder.java" title="解析token" extension="java"/>
+    <tree path="/src/main/java/com/wis/school/util/Encode_MD5.java" title="md5加密" extension="java"/>
+    <tree path="/src/main/java/com/wis/school/util/Result.java" title="封装json响应格式" extension="java"/>
+    <tree path="/src/main/java/com/wis/school/util/uploadFile.java" title="文件上传" extension="java"/>
+    <tree path="/src/main/java/com/wis/school/util/ResultCodeEnum.java" title="封装相应结果码" extension="java"/>
+</trees>
