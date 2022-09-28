@@ -11,13 +11,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wis.school.pojo.Grade;
 import com.wis.school.service.GradeService;
 import com.wis.school.util.Result;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 级控制器
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author liyaj
  * @date 2022/09/27
  */
+@Api(tags = "年级控制器")
 @RestController
 @RequestMapping("/sms/gradeController")
 public class GradeController {
@@ -51,5 +52,36 @@ public class GradeController {
         Page<Grade> page = new Page<>(pageNo, pageSize);
         IPage<Grade> pages = gradeService.getGradeByOpr(page, gradeName);
         return Result.ok(pages);
+    }
+
+    /**
+     * 修改 新增接口
+     *
+     * @param grade 年级
+     * @return {@link Result}
+     */
+    @ApiOperation("修改")
+    @PostMapping("/saveOrUpdateGrade")
+    public Result saveOrUpdateGrade(
+            @ApiParam("JSON里面Grade对象转换为后台数据模组")
+            @RequestBody Grade grade) {
+        gradeService.saveOrUpdate(grade);
+        return Result.ok();
+    }
+
+    /**
+     * 删除年级通过id
+     * 通过id删除年级(单个\批量)
+     *
+     * @param ids id集合
+     * @return {@link Result}
+     */
+    @ApiOperation("删除")
+    @DeleteMapping("/deleteGrade")
+    public Result deleteGradeById(
+            @ApiParam("JSON里面Grade对象id集合")
+            @RequestBody List<Integer> ids) {
+        gradeService.removeBatchByIds(ids);
+        return Result.ok();
     }
 }
