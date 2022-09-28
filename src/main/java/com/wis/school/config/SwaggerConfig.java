@@ -36,12 +36,12 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("API测试文档")
-                .description("DEMO项目的接口测试文档")
-                .termsOfServiceUrl("http://www.hangge.com")
+                .description("smart_school项目的接口测试文档")
+                .termsOfServiceUrl("https://moreac.top")
                 .version("1.0")
-                .contact(new Contact("航歌",
-                        "http://www.hangge.com",
-                        "hangge@hangge.com"))
+                .contact(new Contact("juanxincai",
+                        "https://moreac.top",
+                        "332209078@qq.com"))
                 .build();
     }
 }
