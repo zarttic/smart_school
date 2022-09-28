@@ -84,4 +84,16 @@ public class GradeController {
         gradeService.removeBatchByIds(ids);
         return Result.ok();
     }
+
+    /**
+     * 获取年级信息
+     *
+     * @return {@link Result}
+     */
+    @ApiOperation("获取所有年级信息")
+    @GetMapping("/getGrades")
+    public Result getGrades() {
+        List<Grade> list = gradeService.getGrades();
+        return Result.ok(list);
+    }
 }

@@ -17,6 +17,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * 级服务impl
  *
@@ -27,6 +29,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class GradeServiceImpl extends ServiceImpl<GradeMapper, Grade> implements GradeService {
 
+    /**
+     * 年级分页查询
+     *
+     * @param page      页面
+     * @param gradeName 年级名字
+     * @return {@link IPage}<{@link Grade}>
+     */
     @Override
     public IPage<Grade> getGradeByOpr(Page<Grade> page, String gradeName) {
         QueryWrapper<Grade> queryWrapper = new QueryWrapper<>();
@@ -37,5 +46,15 @@ public class GradeServiceImpl extends ServiceImpl<GradeMapper, Grade> implements
         queryWrapper.orderByAsc("name");
 
         return baseMapper.selectPage(page, queryWrapper);
+    }
+
+    /**
+     * 获取年级信息
+     *
+     * @return {@link List}<{@link Grade}>
+     */
+    @Override
+    public List<Grade> getGrades() {
+        return baseMapper.selectList(null);
     }
 }
