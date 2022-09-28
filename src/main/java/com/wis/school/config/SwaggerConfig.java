@@ -23,6 +23,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    /**
+     * 摘要
+     *
+     * @return {@link Docket}
+     */
     @Bean
     Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -33,6 +38,11 @@ public class SwaggerConfig {
                 .build();
     }
 
+    /**
+     * api信息
+     *
+     * @return {@link ApiInfo}
+     */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("API测试文档")

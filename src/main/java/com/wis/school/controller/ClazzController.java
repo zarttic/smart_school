@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wis.school.pojo.Clazz;
 import com.wis.school.service.ClazzService;
 import com.wis.school.util.Result;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.util.List;
  * @author liyaj
  * @date 2022/09/27
  */
+@Api(tags = "班级管理器")
 @RestController
 @RequestMapping("/sms/clazzController")
 public class ClazzController {

@@ -41,6 +41,12 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper,Admin> implements 
         return baseMapper.selectOne(queryWrapper);
     }
 
+    /**
+     * 通过id获取管理员
+     *
+     * @param userId 用户id
+     * @return {@link Admin}
+     */
     @Override
     public Admin getAdminById(Long userId) {
         QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();
@@ -48,6 +54,13 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper,Admin> implements 
         return baseMapper.selectOne(queryWrapper);
     }
 
+    /**
+     * 查询到所有的管理
+     *
+     * @param page 页面
+     * @param name 名字
+     * @return {@link IPage}<{@link Admin}>
+     */
     @Override
     public IPage<Admin> getAllAdmin(Page<Admin> page, String name) {
         QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();
