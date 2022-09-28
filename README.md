@@ -1,4 +1,3 @@
 # 工程简介
-
-# 延伸阅读
+[![wakatime](https://wakatime.com/badge/github/A-long-Li/smart_school.svg)](https://wakatime.com/badge/github/A-long-Li/smart_school)
 
