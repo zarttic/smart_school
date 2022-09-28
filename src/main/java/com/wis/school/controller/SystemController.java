@@ -6,28 +6,30 @@
 
 package com.wis.school.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wis.school.pojo.*;
 import com.wis.school.service.AdminService;
 import com.wis.school.service.StudentService;
 import com.wis.school.service.TeacherService;
-import com.wis.school.util.CreateVerifyCodeImage;
-import com.wis.school.util.JwtHelper;
-import com.wis.school.util.Result;
-import com.wis.school.util.ResultCodeEnum;
+import com.wis.school.util.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 系统控制器
@@ -189,13 +191,96 @@ public class SystemController {
                 res.put ("user",adminService.getAdminById(tokenMessage.getUserId()));
                 break;
             case 2:
-                res.put ("user",studentService.getStudentById(tokenMessage.getUserId()));
+                res.put("user", studentService.getStudentById(tokenMessage.getUserId()));
                 break;
             case 3:
-                res.put ("user",teacherService.getTeacherById(tokenMessage.getUserId()));
+                res.put("user", teacherService.getTeacherById(tokenMessage.getUserId()));
                 break;
 
         }
         return Result.ok(res);
+    }
+
+    /**
+     * 头像上传
+     * 待实现 上传成功之后删除之前的头像
+     * 上传不是热加载所以需要重启服务器之后才能更新上传的头像
+     *
+     * @param multipartFile 上传文件
+     * @return {@link Result}
+     */
+    @ApiOperation("头像上传")
+    @PostMapping("/headerImgUpload")
+    public Result headerImgUpload(
+            @ApiParam("二进制文件") @RequestPart("multipartFile") MultipartFile multipartFile) {
+        String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+        String fileName = uuid.concat(multipartFile.getOriginalFilename());
+        String portraitPath = "C:/Users/liyaj/IdeaProjects/school/src/main/resources/public/upload/".concat(fileName);
+        try {
+            multipartFile.transferTo(new File(portraitPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String headImag = "upload/" + fileName;
+        return Result.ok(headImag);
+    }
+
+    /**
+     * 更新密码
+     *
+     * @param token  令牌
+     * @param oldPwd 旧密码
+     * @param newPwd 新密码
+     * @return {@link Result}
+     */
+    @PostMapping("/updatePwd/{oldPwd}/{newPwd}")
+    public Result updatePwd(
+            @RequestHeader("token") String token,
+            @PathVariable("oldPwd") String oldPwd,
+            @PathVariable("newPwd") String newPwd) {
+        if (JwtHelper.isExpiration(token)) {
+            return Result.fail().message("token失效");
+        }
+        TokenBody bd = JwtHelper.getTokenMessage(token);
+        String oldpwd = Encode_MD5.encrypt(oldPwd);
+        String newpwd = Encode_MD5.encrypt(newPwd);
+        switch (bd.getUserType()) {
+            case 1: {
+                QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();
+                Admin one = adminService.getOne(
+                        queryWrapper.eq("id", bd.getUserId()).eq("password", oldpwd));
+                if (one != null) {
+                    one.setPassword(newpwd);
+                    adminService.saveOrUpdate(one);
+                } else {
+                    return Result.fail().message("原密码有误");
+                }
+                break;
+            }
+            case 2: {
+                QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
+                Student one = studentService.getOne(
+                        queryWrapper.eq("id", bd.getUserId()).eq("password", oldpwd));
+                if (one != null) {
+                    one.setPassword(Encode_MD5.encrypt(newpwd));
+                    studentService.saveOrUpdate(one);
+                    break;
+                } else {
+                    return Result.fail().message("密码有误");
+                }
+            }
+            case 3: {
+                QueryWrapper<Teacher> queryWrapper = new QueryWrapper<>();
+                Teacher one = teacherService.getOne(
+                        queryWrapper.eq("id", bd.getUserId()).eq("password", oldpwd));
+                if (one != null) {
+                    one.setPassword(Encode_MD5.encrypt(newpwd));
+                    teacherService.saveOrUpdate(one);
+                } else {
+                    return Result.fail().message("原密码有误");
+                }
+            }
+        }
+        return Result.ok();
     }
 }
