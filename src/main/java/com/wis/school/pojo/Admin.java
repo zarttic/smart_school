@@ -38,6 +38,10 @@ public class Admin {
      */
     private Character gender;
     /**
+     * 密码
+     */
+    private String password;
+    /**
      * 电子邮件
      */
     private String email;
