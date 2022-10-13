@@ -78,7 +78,7 @@ public class StudentController {
      * @return {@link Result}
      */
     @DeleteMapping("delStudentById")
-    public Result delStudentById(List<Integer> ids) {
+    public Result delStudentById(@RequestBody List<Integer> ids) {
         studentService.removeByIds(ids);
         return Result.ok();
     }

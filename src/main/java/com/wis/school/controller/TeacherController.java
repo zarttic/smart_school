@@ -70,6 +70,12 @@ public class TeacherController {
         return Result.ok();
     }
 
+    /**
+     * 删除老师
+     *
+     * @param ids id
+     * @return {@link Result}
+     */
     @ApiOperation("删除教师")
     @DeleteMapping("deleteTeacher")
     public Result deleteTeacher(@ApiParam("删除的教师id集合") @RequestBody List<Integer> ids) {

@@ -21,9 +21,28 @@ import com.wis.school.pojo.LoginForm;
  */
 public interface AdminService extends IService<Admin> {
 
+    /**
+     * 登录
+     *
+     * @param loginForm 登录表单
+     * @return {@link Admin}
+     */
     Admin login(LoginForm loginForm);
 
+    /**
+     * 通过id获取管理
+     *
+     * @param userId 用户id
+     * @return {@link Admin}
+     */
     Admin getAdminById(Long userId);
 
+    /**
+     * 得到所有管理
+     *
+     * @param page 页面
+     * @param name 名字
+     * @return {@link IPage}<{@link Admin}>
+     */
     IPage<Admin> getAllAdmin(Page<Admin> page, String name);
 }

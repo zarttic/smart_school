@@ -14,6 +14,12 @@ import com.wis.school.pojo.Clazz;
 
 import java.util.List;
 
+/**
+ * 班级服务
+ *
+ * @author liyaj
+ * @date 2022/10/08
+ */
 public interface ClazzService extends IService<Clazz> {
     /**
      * 班级分页查询

@@ -20,9 +20,28 @@ import com.wis.school.pojo.Teacher;
  * @date 2022/09/27
  */
 public interface TeacherService extends IService<Teacher> {
+    /**
+     * 登录
+     *
+     * @param loginForm 登录表单
+     * @return {@link Teacher}
+     */
     Teacher login(LoginForm loginForm);
 
-     Teacher getTeacherById(Long userId);
+    /**
+     * 通过id获取老师
+     *
+     * @param userId 用户id
+     * @return {@link Teacher}
+     */
+    Teacher getTeacherById(Long userId);
 
+    /**
+     * 得到老师
+     *
+     * @param page 页面
+     * @param name 名字
+     * @return {@link IPage}<{@link Teacher}>
+     */
     IPage<Teacher> getTeachers(Page<Teacher> page, String name);
 }

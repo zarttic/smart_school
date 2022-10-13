@@ -13,6 +13,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 老师
+ *
+ * @author liyaj
+ * @date 2022/10/08
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

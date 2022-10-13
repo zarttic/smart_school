@@ -64,6 +64,12 @@ public class ClazzController {
         return Result.ok();
     }
 
+    /**
+     * 删除班级操作
+     *
+     * @param ids id
+     * @return {@link Result}
+     */
     @ApiOperation("删除操作")
     @DeleteMapping("/deleteClazz")
     public Result deleteClazz(
@@ -72,6 +78,11 @@ public class ClazzController {
         return Result.ok();
     }
 
+    /**
+     * 获取班级
+     *
+     * @return {@link Result}
+     */
     @ApiOperation("获取所有班级")
     @GetMapping("/getClazzs")
     public Result getclazzs() {
